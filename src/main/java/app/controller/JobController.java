@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.model.JobInfo;
-import app.spark.SparkContextHolder;
+import app.spark.SparkContextPool;
 import org.apache.spark.SparkConf;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("spark")
 public class JobController {
 
-    private static SparkContextHolder holder = new SparkContextHolder();
+    private static SparkContextPool scPool = SparkContextPool.getInstance();
 
     @RequestMapping("/submitJob")
     public static JobInfo submit(
@@ -23,19 +23,9 @@ public class JobController {
     ) {
 
         SparkConf conf = new SparkConf().setAppName(name).setMaster(master);
-        holder.addSparkContext(conf);
+        String instanceName = scPool.addSparkContext(conf);
 
-//        String logFile = "data/kmeans.txt";
-//        JavaRDD<String> logData = holder.get("Simple Application").textFile(logFile).cache();
-//
-//        long numAs = logData.filter(new Function<String, Boolean>() {
-//            @Override
-//            public Boolean call(String s) throws Exception {
-//                return s.contains("6");
-//            }
-//        }).count();
-
-        return new JobInfo(name, master);
+        return new JobInfo(instanceName, master);
     }
 
 }
