@@ -11,14 +11,14 @@ import java.util.Map;
  */
 public class SparkContextHolder {
 
-    //    private SparkConf conf = new SparkConf().setAppName("Simple Application");
-    private Map<String, JavaSparkContext> scMap = new HashMap<String, JavaSparkContext>();
+    private Map<String, JavaSparkContext> scMap = null;
 
     public SparkContextHolder(Map<String, JavaSparkContext> scMap) {
         this.scMap = this.scMap;
     }
 
     public SparkContextHolder() {
+        this.scMap = new HashMap<String, JavaSparkContext>();
     }
 
     public void addSparkContext(SparkConf conf) {
