@@ -15,11 +15,21 @@
     </parent>
 
     <dependencies>
+        <!-- Spring dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency> <!-- Spark dependency -->
+
+        <!-- JSON dependency -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib-ext-spring</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- Spark dependency -->
+        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.10</artifactId>
             <version>1.1.1</version>
@@ -33,6 +43,11 @@
                     <artifactId>log4j</artifactId>
                 </exclusion>-->
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.10</artifactId>
+            <version>1.1.1</version>
         </dependency>
     </dependencies>
 

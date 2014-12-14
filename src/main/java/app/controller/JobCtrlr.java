@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("spark")
-public class JobController {
+public class JobCtrlr {
 
     private static SparkContextPool scPool = SparkContextPool.getInstance();
 
@@ -26,6 +26,22 @@ public class JobController {
         String instanceName = scPool.addSparkContext(conf);
 
         return new JobInfo(instanceName, master);
+    }
+
+    @RequestMapping("initial")
+    public static void initial() {
+
+        //tachyon
+//        SparkConf conf_tachyon = new SparkConf()
+//                .setAppName("tachyon")
+//                .setMaster("local");
+//        String instanceName = scPool.addSparkContext(conf_tachyon);
+
+        //interactive
+        SparkConf conf_inter = new SparkConf()
+                .setAppName("interactive")
+                .setMaster("local");
+        scPool.addSparkContext(conf_inter);
     }
 
 }
